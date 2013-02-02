@@ -5,7 +5,7 @@
 	 * Allow your pages to contain implicit ajax calls, using the power of selector targets
 	 *
 	 * - Works with <a> and <form> links
-	 * - Initialise this feature with a single $("body").xTarget(); call
+	 * - Initialise this feature with a single $("body").xtarget(); call
 	 *
 	 * @example
 	 * <div id="position"></div>
@@ -15,7 +15,7 @@
 	 * <div id="position"></div>
 	 * <form action="linked_page" target="#position">(...)</form>
 	 */
-	$.fn.xTarget = function(options)
+	$.fn.xtarget = function(options)
 	{
 
 		//------------------------------------------------------------------------------------ settings
@@ -92,10 +92,20 @@
 			if ($this.hasClass(settings["submit"])) {
 				var $parent_form = $this.closest("form");
 				if ($parent_form.length) {
-					$parent_form.ajaxSubmit($.extend(ajax, {
-						url: urlAppend(this.href, this.search)
-					}));
-					$parent_form.data("jqxhr").from = this;
+					if ($parent_form.ajaxSubmit != undefined) {
+						$parent_form.ajaxSubmit($.extend(ajax, {
+							url: urlAppend(this.href, this.search)
+						}));
+						$parent_form.data("jqxhr").from = this;
+					}
+					else {
+						var $xhr = $.ajax($.extend(ajax, {
+							url:  urlAppend(this.href, this.search),
+							data: $parent_form.serialize(),
+							type: $parent_form.attr("method")
+						}));
+						$xhr.from = this;
+					}
 					done = true;
 				}
 			}
@@ -115,10 +125,20 @@
 		{
 			var $this = $(this);
 			event.preventDefault();
-			$this.ajaxSubmit($.extend(ajax, {
-				url: urlAppend(this.action, this.search)
-			}));
-			$this.data("jqxhr").from = this;
+			if ($this.ajaxSubmit != undefined) {
+				$this.ajaxSubmit($.extend(ajax, {
+					url: urlAppend(this.action, this.search)
+				}));
+				$this.data("jqxhr").from = this;
+			}
+			else {
+				var $xhr = $.ajax($.extend(ajax, {
+					url:  urlAppend(this.action, this.search),
+					data: $this.serialize(),
+					type: $this.attr("method")
+				}));
+				$xhr.from = this;
+			}
 		});
 
 		return this;
