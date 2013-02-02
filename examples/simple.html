@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jquery.xtarget simple example</title>
+<script src="jquery.js"></script>
+<script src="../jquery.xtarget.js"></script>
+<script>
+
+$("document").ready(function() {
+
+	$("body").xtarget();
+
+});
+
+</script>
+</head>
+<body>
+
+<h1>jquery.xtarget simple example</h1>
+
+<a href="_ajax.html" target="#container">Click here to load an ajax widget</a>
+
+<div id="container">This will load here</div>
+
+<h1>The code</h1>
+
+<p>
+	Full page code bellow. Ajax has never been so simple !
+	<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;jquery.xtarget simple example&lt;/title&gt;
+	&lt;script src="jquery.js"&gt;&lt;/script&gt;
+	&lt;script src="../jquery.xtarget.js"&gt;&lt;/script&gt;
+	&lt;script&gt;
+
+		$("document").ready(function() {
+
+			$("body").xtarget();
+
+		});
+
+	&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;a href="_ajax.html" target="#container"&gt;Click here to load an ajax widget&lt;/a&gt;
+&lt;div id="container"&gt;This will load here&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+	</pre>
+</p>
+
+</body>
+</html>
