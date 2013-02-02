@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>jquery.xtarget form example</title>
-	<script src="jquery.js"></script>
-	<script src="../jquery.xtarget.js"></script>
-	<script>
-
-		$("document").ready(function() {
-
-			$("body").xtarget();
-
-		});
-
-	</script>
+<title>jquery.xtarget form example</title>
+<script src="jquery.js"></script>
+<script src="../jquery.xtarget.js"></script>
+<script>
+	$("document").ready(function() {
+		$("body").xtarget();
+	});
+</script>
 </head>
 <body>
 
 <a href="https://github.com/bapplistudio/jquery.xtarget">source / download</a>
 - <a href="simple.html">simple example</a>
 - <strong>form example</strong>
+- <a href="full.html">full example</a>
 
 <h1>jquery.xtarget form example</h1>
 
 <form action="_form.php" target="#target">
 	<p>
 		Your name :<br>
-		<input id="name" name="name">
+		<input id="name" name="name" value="Joe">
 	</p>
 	<p>
 		Your age:<br>
-		<input name="age">
+		<input name="age" value="87">
 	</p>
 	<input type="submit" value="submit">
 </form>
@@ -41,6 +38,36 @@
 <p>
 	Full page code bellow. Ajax has never been so simple !
 	<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;jquery.xtarget form example&lt;/title&gt;
+&lt;script src="jquery.js"&gt;&lt;/script&gt;
+&lt;script src="../jquery.xtarget.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+	$("document").ready(function() {
+		$("body").xtarget();
+	});
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;form action="_form.php" target="#target"&gt;
+	&lt;p&gt;
+		Your name :&lt;br&gt;
+		&lt;input id="name" name="name"&gt;
+	&lt;/p&gt;
+	&lt;p&gt;
+		Your age:&lt;br&gt;
+		&lt;input name="age"&gt;
+	&lt;/p&gt;
+	&lt;input type="submit" value="submit"&gt;
+&lt;/form&gt;
+
+&lt;div id="target"&gt;This will load here&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
 	</pre>
 </p>
 

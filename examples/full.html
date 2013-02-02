@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jquery.xtarget full example</title>
+	<script src="jquery.js"></script>
+	<script src="jquery.build.js"></script>
+	<script src="jquery.form.js"></script>
+	<script src="../jquery.xtarget.js"></script>
+	<script>
+		$("document").ready(function() {
+			$("body").build(function() {
+				this.xtarget({
+					url_append: "added=added_value",
+					keep:       "myclass",
+					submit:     "submitme",
+					error:      function(xhr, status, error) { alert("Error : " + error); },
+					success:    function(data, status, xhr) { alert("Ajax call succeeded !"); }
+				});
+				this.in(".alert").click(function() { alert("alert works !"); });
+			});
+		});
+	</script>
+</head>
+<body>
+
+<a href="https://github.com/bapplistudio/jquery.xtarget">source / download</a>
+- <a href="simple.html">simple example</a>
+- <a href="form.html">form example</a>
+- <strong>full example</strong>
+
+<h1>jquery.xtarget full example</h1>
+<form action="_full.php" target="#result" method="POST" enctype="multipart/form-data">
+	Your name : <input name="name" value="Mike">
+	<p>
+	Select a little file to send : <input type="file" name="file">
+	<p>
+	<input type="submit" value="Submit">
+	<p>
+	<a href="_foo.php" target="#popup" class="submitme myclass">An alternative popup submit to another page</a>
+</form>
+
+<a href="_fullcode.php" target="#code">View the source code</a>
+<pre id="code"></pre>
+
+</body>
+</html>
