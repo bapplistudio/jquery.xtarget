@@ -11,16 +11,16 @@ This enable you to make the simpliest ajax calls ever, directly into your html c
 
 ```html
 <a href="page.html" target="#where">click here</a>
-<div id="where"&gt;content of page.html will be loaded here</div>
+<div id="where">content of page.html will be loaded here</div>
 ```
 
 Features :
 
 * works with &lt;a&gt; and &lt;form&gt; elements which target is an element identifier selector, beggining with "#"
 
-* automatically use [jquery.build](https://github.com/bapplistudio/jquery.build) when plugin is loaded. This enable jquery active content to be set after the ajax call.
+* automatically use [jquery.build](https://github.com/bapplistudio/jquery.build) when plugin is loaded. This enables jquery active content to be set after the ajax call.
 
-* automatically use [jquery.form](https://github.com/malsup/form) when plugin is loaded. This enable you send files using ajax and create upload progress events.
+* automatically use [jquery.form](https://github.com/malsup/form) when plugin is loaded. This enables you to send files using ajax and create upload progress events.
 
 Other examples and codes :
 
@@ -42,20 +42,24 @@ $("body").xtarget({
 
 * **url_append** : will append additional arguments to all links
 
-* **keep** : when target is an element id that does not exist on page, xtarget will create a &lt;div&gt; element with the considered id. **keep** tells xtarget which classes of your &lt;a&gt; element should be transmitted to this new &lt;div&gt; element, as this could be usefull for dealing with popups into your css or javascript. Default value for **keep** is "popup". Example :
+* **keep** : when target is an element id that does not exist on page, xtarget will create a &lt;div&gt; element with the considered id. **keep** tells xtarget which classes of your &lt;a&gt; element should be transmitted to this new &lt;div&gt; element, as this could be usefull for dealing with popups into your css or javascript. Default value for **keep** is "popup".
+
+Example :
 
 ```html
 <a href="page.html" class="popup" target="#dest">Click here</a>
 ```
 
-This will result in following page code :
+This will result into the following page code :
 
 ```html
-<a href="page.html" class="popup">Click here</a>
+<a href="page.html" class="popup what">Click here</a>
 <div id="dest" class="popup">The content of page.html here</div>
 ```
 
-* **submit** : all &lt;a&gt; elements that are inside a &lt;form&gt; and have this class send the content of the form with their href as replacement for the form action. Default value for **submit** is "submit". Example :
+* **submit** : all &lt;a&gt; elements that are inside a &lt;form&gt; and that have this class will send the content of the form using ajax with their href as replacement for the form action. Default value for **submit** is "submit".
+
+Example :
 
 ```html
 <form action="foo.html">
