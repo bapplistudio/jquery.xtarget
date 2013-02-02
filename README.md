@@ -18,9 +18,9 @@ Features :
 
 * works with &lt;a&gt; and &lt;form&gt; elements which target is an element identifier selector, beggining with "#"
 
-* automatically use [jquery.build](https://github.com/bapplistudio/jquery.build) when plugin is loaded. This enables jquery active content to be set after the ajax call.
+* automatically uses [jquery.build](https://github.com/bapplistudio/jquery.build) when plugin is loaded. This enables jquery active content to be set after the ajax call.
 
-* automatically use [jquery.form](https://github.com/malsup/form) when plugin is loaded. This enables you to send files using ajax and create upload progress events.
+* automatically uses [jquery.form](https://github.com/malsup/form) when plugin is loaded. This enables you to send files using ajax and create upload progress events.
 
 Other examples and codes :
 
