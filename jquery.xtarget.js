@@ -24,14 +24,23 @@
 			keep:       "popup",
 			submit:     "submit",
 			error:      undefined,
-			success:    undefined
+			success:    undefined,
+			draggable_blank: undefined
 		}, options);
 
 		//---------------------------------------------------------------------------------------- ajax
 		var ajax =
 		{
+
 			//------------------------------------------------------------------------------- ajax.target
 			target: undefined,
+
+			//---------------------------------------------------------------------------------- complete
+			complete: function(xhr)
+			{
+				clearTimeout(xhr.time_out);
+				$("body").css({cursor: "auto"});
+			},
 
 			//-------------------------------------------------------------------------------- ajax.error
 			error: function(xhr, status, error)
@@ -40,26 +49,53 @@
 					settings["error"](xhr, status, error);
 				}
 			},
+
 			//------------------------------------------------------------------------------ ajax.success
 			success: function(data, status, xhr)
 			{
+				var $from = $(xhr.from);
 				var $target = $(xhr.from.target);
+				var build_target = false;
+				// popup a new element
 				if (!$target.length) {
-					$target = $("<div>").attr("id", xhr.from.target.substr(1));
-					var $from = $(xhr.from);
+					var destination = xhr.from.target.substr(1);
+					var $where = $from;
+					if (destination == "_blank") {
+						destination = "window" + ++window.zindex_counter;
+						$where = $($("body").children().last());
+					}
+					$target = $("<div>").attr("id", destination);
 					if (settings["keep"] && $from.hasClass(settings["keep"])) {
 						$target.addClass(settings["keep"]);
 					}
-					$target.insertAfter($from);
+					$target.insertAfter($where);
+					if ($where != $from) {
+						$target.css("position", "absolute");
+						$target.css("left", document.mouse.x);
+						$target.css("top",  document.mouse.y);
+						$target.css("z-index", window.zindex_counter);
+						if (settings["draggable_blank"] != undefined) {
+							$target.draggable({ handle: settings["draggable_blank"] });
+						}
+					}
+					build_target = true;
 				}
+				// write result into destination element, and build jquery active contents
 				$target.html(data);
+				if ($target.build != undefined) {
+					if (build_target) $target.build();
+					else              $target.children().build();
+				}
+				// on.success callbacks
 				if (settings["success"] != undefined) {
 					settings["success"](data, status, xhr);
 				}
-				if ($target.build != undefined) {
-					$target.build();
+				var on_success = $from.data("on.success");
+				if (on_success != undefined) {
+					on_success(data, status, xhr);
 				}
 			}
+
 		};
 
 		//----------------------------------------------------------------------------------- urlAppend
@@ -88,7 +124,7 @@
 		{
 			event.preventDefault();
 			var $this = $(this);
-			var done = false;
+			var xhr = undefined;
 			if ($this.hasClass(settings["submit"])) {
 				var $parent_form = $this.closest("form");
 				if ($parent_form.length) {
@@ -96,25 +132,26 @@
 						$parent_form.ajaxSubmit($.extend(ajax, {
 							url: urlAppend(this.href, this.search)
 						}));
-						$parent_form.data("jqxhr").from = this;
+						xhr = $parent_form.data("jqxhr");
 					}
 					else {
-						var $xhr = $.ajax($.extend(ajax, {
+						xhr = $.ajax($.extend(ajax, {
 							url:  urlAppend(this.href, this.search),
 							data: $parent_form.serialize(),
 							type: $parent_form.attr("method")
 						}));
-						$xhr.from = this;
 					}
-					done = true;
 				}
 			}
-			if (!done) {
-				var $xhr = $.ajax($.extend(ajax, {
+			if (!xhr) {
+				xhr = $.ajax($.extend(ajax, {
 					url: urlAppend(this.href, this.search)
 				}));
-				$xhr.from = this;
 			}
+			xhr.from    = this;
+			xhr.mouse_x = (document.mouse == undefined) ? event.pageX : document.mouse.x;
+			xhr.mouse_y = (document.mouse == undefined) ? event.pageY : document.mouse.y;
+			xhr.time_out = setTimeout(function(){ $("body").css({cursor: "wait"}); }, 500);
 		});
 
 		//---------------------------------------------------------------- $('form[target^="#"]').click
@@ -132,12 +169,11 @@
 				$this.data("jqxhr").from = this;
 			}
 			else {
-				var $xhr = $.ajax($.extend(ajax, {
+				$.ajax($.extend(ajax, {
 					url:  urlAppend(this.action, this.search),
 					data: $this.serialize(),
 					type: $this.attr("method")
-				}));
-				$xhr.from = this;
+				})).from = this;
 			}
 		});
 
