@@ -32,28 +32,37 @@ You can initialize some options for your page :
 
 ```javascript
 $("body").xtarget({
-	url_append: "as_widget=1&some=others",
-	keep:       "popup",
-	submit:     "submit",
-	error:      function(xhr, status, error){ (...) },
-	success:    function(data, status, xhr){ (...) }
+    url_append:      "as_widget=1&some=others",
+    keep:            "popup",
+    submit:          "submit",
+    error:           function(xhr, status, error){ (...) },
+    success:         function(xhr, status, error){ (...) },
+    popup_element:   "div",
+    draggable_blank: ".window>h2",
+    history: {
+        condition: ".window>h2",
+        on_post:   false,
+        title:     ".window>h2"
+    }
 });
 ```
 
 * **url_append** : will append additional arguments to all links
 
-* **keep** : when target is an element id that does not exist on page, xtarget will create a &lt;div&gt; element with the considered id. **keep** tells xtarget which classes of your &lt;a&gt; element should be transmitted to this new &lt;div&gt; element, as this could be usefull for dealing with popups into your css or javascript. Default value for **keep** is "popup".
+This is useful when you want your link to have some special arguments when they are used as ajax calls, but not when they are called ie with right-click-open-in-new-window.
+
+* **keep** : when target is an element id that does not exist on page, xtarget will create a DOM element with the considered id. **keep** tells xtarget which classes of your &lt;a&gt; element should be transmitted to this new element, as this could be useful for dealing with popups into your css or javascript. Default value for **keep** is "popup".
 
 Example :
 
 ```html
-<a href="page.html" class="popup" target="#dest">Click here</a>
+<a href="page.html" class="popup what" target="#dest">Click here</a>
 ```
 
-This will result into the following page code :
+A first click will result into the following page code, with the transmission of the "popup" class to the newly generated &lt;div&gt;&nbsp;:
 
 ```html
-<a href="page.html" class="popup what">Click here</a>
+<a href="page.html" class="popup what" target="#dest">Click here</a>
 <div id="dest" class="popup">The content of page.html here</div>
 ```
 
@@ -68,6 +77,79 @@ Example :
 </form>
 ```
 
-* **error** : thrown when ajax call error. Parameters are the same as [jquery $.ajax() error event](http://api.jquery.com/jQuery.ajax)
+* **error** : thrown when ajax calls error. Parameters are the same as [jquery $.ajax() error event](http://api.jquery.com/jQuery.ajax)
 
 * **success** : event thrown after target container is loaded with data. Parameters are the sames as [jquery $.ajax() success event](http://api.jquery.com/jQuery.ajax)
+
+* **popup_element** : this contains the tag name of the created target element, used when the target id was not found into current page. Default generated DOM element is &lt;div&gt;, but you can change it with this option.
+
+Example :
+
+```html
+<script>
+$("body").xtarget({ popup_element: "section" });
+</script>
+<a href="page.html" target="#dest">Click here</a>
+```
+
+A click will result into the following page code, with &lt;section&gt; instead of the default &lt;div&gt; :
+
+```html
+<script>
+$("body").xtarget({ popup_element: "section" });
+</script>
+<a href="page.html" target="#dest">Click here</a>
+<section id="dest">The content of page.html</section>
+```
+
+* **draggable_blank** : when target is **_blank** or the id of a new div, the **draggable_blank** option enables you to make this element draggable, ie for popup windows
+
+Default value is **undefined**. If you set any other value, the [jquery-ui draggable component](http://api.jqueryui.com/draggable) must be enabled to use this option.
+
+If the value is **true**, the whole loaded DOM element will be used as handle for dragging.
+
+If the value is a [jQuery selector](http://api.jquery.com/category/selectors) string, the matching elements will be used as an [handle](http://api.jqueryui.com/draggable/#option-handle) for the draggable element.
+
+Example :
+If your loaded page contains an &lt;h2&gt; element :
+
+```html
+<script>
+$("body").xtarget({ draggable_blank: "div>h2" });
+</script>
+<a href="page.html" target="#dest">Click here</a>
+```
+
+A click will result into the following code, and you will be abble to drag your window using the &gt;h2&lt; as handle&nbsp;:
+
+```html
+<script>
+$("body").xtarget({ draggable_blank: "div>h2" });
+</script>
+<a href="page.html" target="#dest">Click here</a>
+<div id="dest"><h2>Drag me</h2><p>The text of your loaded page<p></div>
+```
+
+* **history** : This set of options enables more transparent ajax calls. When **history.condition** is set, it defines rules to push your ajax calls into your browser's history.
+
+** **history.condition** : A [jQuery selector](http://api.jquery.com/category/selectors) string : the page will be pushed into the history only if some elements of the loaded content contains elements matching this selector. **false** or **undefined** here will disable the history pushing feature.
+
+** **history.on_post** : boolean, default to **false** and forms sent with **POST** method will not be pushed into history. When **true**, they will.
+
+** **history.title** : A [jQuery selector](http://api.jquery.com/category/selectors) string used to find the text which will be used as title into your browser's history. If false or empty result, the URL will be used as title.
+
+Example :
+
+```html
+$("body").xtarget({
+	history: {
+		condition: "h2",
+		on_post: false,
+		title: "h2"
+	}
+});
+```
+
+When xtarget makes ajax calls, they will be pushed into your browser history each time the loaded content contains an &lt;h2&gt; element, and the text of this &lt;h2&gt; element will be stored into the history.
+
+The history pushing feature is not activated by default. If you set it on, notice that a **popstate** event will be thrown each time an historized ajax call is selected into the history. The xtarget event is active once the history element state object contains a true **reload** property, so beware of compatibility issues if the same mechanism is used by others programs.
