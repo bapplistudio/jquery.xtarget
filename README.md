@@ -35,8 +35,8 @@ $("body").xtarget({
     url_append:      "as_widget=1&some=others",
     keep:            "popup",
     submit:          "submit",
-    error:           function(xhr, status, error){ (...) },
-    success:         function(xhr, status, error){ (...) },
+    error:           function(xhr, status, error){ console.log("error"); },
+    success:         function(xhr, status, error){ console.log("success"); },
     popup_element:   "div",
     draggable_blank: ".window>h2",
     history: {
