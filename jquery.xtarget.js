@@ -150,7 +150,7 @@
 				// on success callbacks
 				var target = $target.get()[0];
 				if (settings["success"] != undefined) {
-					taet.success = settings["success"];
+					target.success = settings["success"];
 					target.success(data, status, xhr);
 					target.success = undefined;
 				}
