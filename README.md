@@ -16,11 +16,13 @@ This enable you to make the simpliest ajax calls ever, directly into your html c
 
 Features :
 
-* works with &lt;a&gt; and &lt;form&gt; elements which target is an element identifier selector, beggining with "#"
+* works with &lt;a&gt; and &lt;form&gt; elements which target is an element identifier selector, beggining with "#".
 
 * automatically uses [jquery.build](https://github.com/bapplistudio/jquery.build) when plugin is loaded. This enables jquery active content to be set after the ajax call.
 
 * automatically uses [jquery.form](https://github.com/malsup/form) when plugin is loaded. This enables you to send files using ajax and create upload progress events.
+
+* you can activate the history of your ajax calls into your (recent version) browser's history and update of the displayed address.
 
 Other examples and codes :
 
