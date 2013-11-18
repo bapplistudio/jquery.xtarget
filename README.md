@@ -132,11 +132,11 @@ $("body").xtarget({ draggable_blank: "div>h2" });
 
 * **history** : This set of options enables more transparent ajax calls. When **history.condition** is set, it defines rules to push your ajax calls into your browser's history.
 
-** **history.condition** : A [jQuery selector](http://api.jquery.com/category/selectors) string : the page will be pushed into the history only if some elements of the loaded content contains elements matching this selector. **false** or **undefined** here will disable the history pushing feature.
+* **history.condition** : A [jQuery selector](http://api.jquery.com/category/selectors) string : the page will be pushed into the history only if some elements of the loaded content contains elements matching this selector. **false** or **undefined** here will disable the history pushing feature.
 
-** **history.on_post** : boolean, default to **false** and forms sent with **POST** method will not be pushed into history. When **true**, they will.
+* **history.on_post** : boolean, default to **false** and forms sent with **POST** method will not be pushed into history. When **true**, they will.
 
-** **history.title** : A [jQuery selector](http://api.jquery.com/category/selectors) string used to find the text which will be used as title into your browser's history. If false or empty result, the URL will be used as title.
+* **history.title** : A [jQuery selector](http://api.jquery.com/category/selectors) string used to find the text which will be used as title into your browser's history. If false or empty result, the URL will be used as title.
 
 Example :
 
