@@ -142,7 +142,7 @@ $("body").xtarget({ draggable_blank: "div>h2" });
 
 Example :
 
-```html
+```javascript
 $("body").xtarget({
 	history: {
 		condition: "h2",
