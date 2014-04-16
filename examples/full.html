@@ -7,16 +7,16 @@
 	<script src="jquery.form.js"></script>
 	<script src="../jquery.xtarget.js"></script>
 	<script>
-		$("document").ready(function() {
-			$("body").build(function() {
+		$('document').ready(function() {
+			$('body').build(function() {
 				this.xtarget({
-					url_append: "added=added_value",
-					keep:       "myclass",
-					submit:     "submitme",
-					error:      function(xhr, status, error) { alert("Error : " + error); },
-					success:    function(data, status, xhr) { alert("Ajax call succeeded !"); }
+					url_append: 'added=added_value',
+					keep:       'myclass',
+					submit:     'submitme',
+					error:      function(xhr, status, error) { alert('Error : ' + error); },
+					success:    function(data, status, xhr) { alert('Ajax call succeeded !'); }
 				});
-				this.in(".alert").click(function() { alert("alert works !"); });
+				this.in('.alert').click(function() { alert('alert works !'); });
 			});
 		});
 	</script>
