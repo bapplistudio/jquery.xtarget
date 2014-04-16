@@ -5,7 +5,7 @@ jquery.xtarget
 
 This enable you to make the simpliest ajax calls ever, directly into your html code.
 
-* Initialize your page with a simple **$("body").xtarget();**
+* Initialize your page with a simple **$('body').xtarget();**
 
 * Your ajax calls will now be as simple as this :
 
@@ -33,18 +33,18 @@ http://saf.re/github/jquery.xtarget/examples/simple.html
 You can initialize some options for your page :
 
 ```javascript
-$("body").xtarget({
-    url_append:      "as_widget=1&some=others",
-    keep:            "popup",
-    submit:          "submit",
-    error:           function(xhr, status, error){ console.log("error"); },
-    success:         function(xhr, status, error){ console.log("success"); },
-    popup_element:   "div",
-    draggable_blank: ".window>h2",
+$('body').xtarget({
+    url_append:      'as_widget=1&some=others',
+    keep:            'popup',
+    submit:          'submit',
+    error:           function(xhr, status, error){ console.log('error'); },
+    success:         function(xhr, status, error){ console.log('success'); },
+    popup_element:   'div',
+    draggable_blank: '.window>h2',
     history: {
-        condition: ".window>h2",
+        condition: '.window>h2',
         on_post:   false,
-        title:     ".window>h2"
+        title:     '.window>h2'
     }
 });
 ```
@@ -89,7 +89,7 @@ Example :
 
 ```html
 <script>
-$("body").xtarget({ popup_element: "section" });
+$('body').xtarget({ popup_element: 'section' });
 </script>
 <a href="page.html" target="#dest">Click here</a>
 ```
@@ -98,7 +98,7 @@ A click will result into the following page code, with &lt;section&gt; instead o
 
 ```html
 <script>
-$("body").xtarget({ popup_element: "section" });
+$('body').xtarget({ popup_element: 'section' });
 </script>
 <a href="page.html" target="#dest">Click here</a>
 <section id="dest">The content of page.html</section>
@@ -117,7 +117,7 @@ If your loaded page contains an &lt;h2&gt; element :
 
 ```html
 <script>
-$("body").xtarget({ draggable_blank: "div>h2" });
+$('body').xtarget({ draggable_blank: 'div>h2' });
 </script>
 <a href="page.html" target="#dest">Click here</a>
 ```
@@ -126,7 +126,7 @@ A click will result into the following code, and you will be abble to drag your 
 
 ```html
 <script>
-$("body").xtarget({ draggable_blank: "div>h2" });
+$('body').xtarget({ draggable_blank: 'div>h2' });
 </script>
 <a href="page.html" target="#dest">Click here</a>
 <div id="dest"><h2>Drag me</h2><p>The text of your loaded page<p></div>
@@ -143,11 +143,11 @@ $("body").xtarget({ draggable_blank: "div>h2" });
 Example :
 
 ```javascript
-$("body").xtarget({
+$('body').xtarget({
 	history: {
-		condition: "h2",
+		condition: 'h2',
 		on_post: false,
-		title: "h2"
+		title: 'h2'
 	}
 });
 ```
