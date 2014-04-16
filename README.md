@@ -1,5 +1,6 @@
 jquery.xtarget
 ==============
+Simple ajax calls
 
 # Overview
 
