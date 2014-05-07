@@ -156,3 +156,16 @@ $('body').xtarget({
 When xtarget makes ajax calls, they will be pushed into your browser history each time the loaded content contains an &lt;h2&gt; element, and the text of this &lt;h2&gt; element will be stored into the history.
 
 The history pushing feature is not activated by default. If you set it on, notice that a **popstate** event will be thrown each time an historized ajax call is selected into the history. The xtarget event is active once the history element state object contains a true **reload** property, so beware of compatibility issues if the same mechanism is used by others programs.
+
+# MIT License
+
+This program and its documentation are released into MIT License :
+
+« Copyright © Baptiste Pillot - baptiste at pillot dot fr
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+The Software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the Software. »
+
