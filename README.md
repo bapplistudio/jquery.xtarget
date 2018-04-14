@@ -26,8 +26,8 @@ Features :
 * you can activate the history of your ajax calls into your (recent version) browser's history and update of the displayed address.
 
 Other examples and codes :
+https://cdn.rawgit.com/bapplistudio/jquery.xtarget/fef643d0/examples/simple.html
 
-http://saf.re/github/jquery.xtarget/examples/simple.html
 
 # Options
 
